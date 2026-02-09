@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Are you sure?</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Floating hearts animation */
+        .heart-bg {
+            position: fixed;
+            top: -10%;
+            left: 0;
+            width: 100%;
+            height: 120%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(45deg);
+            animation: float 15s infinite;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+        }
+
+        .heart::before {
+            top: -10px;
+            left: 0;
+        }
+
+        .heart::after {
+            left: 10px;
+            top: 0;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(45deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(45deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 60px 50px;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            color: #d63384;
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            line-height: 1.4;
+        }
+
+        .btn {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-size: 1.3em;
+            padding: 18px 50px;
+            margin: 15px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            display: inline-block;
+            min-width: 200px;
+        }
+
+        .btn-yes {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .btn-yes:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 30px rgba(245, 87, 108, 0.4);
+        }
+
+        .btn-no {
+            background: linear-gradient(135deg, #e0e0e0 0%, #b0b0b0 100%);
+            color: #666;
+        }
+
+        .btn-no:hover {
+            transform: scale(0.95);
+            opacity: 0.8;
+        }
+
+        .emoji {
+            font-size: 1.2em;
+            display: inline-block;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        /* Decorative corner hearts */
+        .corner-heart {
+            position: absolute;
+            font-size: 3em;
+            opacity: 0.3;
+        }
+
+        .corner-heart.top-left {
+            top: 20px;
+            left: 20px;
+        }
+
+        .corner-heart.top-right {
+            top: 20px;
+            right: 20px;
+        }
+
+        .corner-heart.bottom-left {
+            bottom: 20px;
+            left: 20px;
+        }
+
+        .corner-heart.bottom-right {
+            bottom: 20px;
+            right: 20px;
+        }
+
+        form {
+            display: inline-block;
+        }
+
+        /* Sad emoji animation for "no" responses */
+        .sad-emoji {
+            font-size: 4em;
+            margin: 20px 0;
+            animation: shake 0.5s ease-in-out infinite;
+        }
+
+        @keyframes shake {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(-10px);
+            }
+            75% {
+                transform: translateX(10px);
+            }
+        }
+
+        /* GIF container styling */
+        .gif-container {
+            margin: 30px 0;
+            animation: fadeIn 0.5s ease-in;
+            max-height: 300px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .reaction-gif {
+            max-width: 100%;
+            max-height: 300px;
+            width: auto;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            object-fit: contain;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Final message styling */
+        .final-message {
+            font-size: 1.3em;
+            color: #764ba2;
+            margin-top: 20px;
+            font-style: italic;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 40px 30px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .btn {
+                font-size: 1.1em;
+                padding: 15px 40px;
+                min-width: 150px;
+            }
+
+            .sad-emoji {
+                font-size: 3em;
+            }
+
+            .reaction-gif {
+                width: 100%;
+                max-width: 250px;
+                max-height: 200px;
+            }
+
+            .final-message {
+                font-size: 1.1em;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="heart-bg">
+    <div class="heart" style="left: 10%; animation-delay: 0s;"></div>
+    <div class="heart" style="left: 20%; animation-delay: 2s;"></div>
+    <div class="heart" style="left: 30%; animation-delay: 4s;"></div>
+    <div class="heart" style="left: 40%; animation-delay: 1s;"></div>
+    <div class="heart" style="left: 50%; animation-delay: 3s;"></div>
+    <div class="heart" style="left: 60%; animation-delay: 5s;"></div>
+    <div class="heart" style="left: 70%; animation-delay: 2.5s;"></div>
+    <div class="heart" style="left: 80%; animation-delay: 4.5s;"></div>
+    <div class="heart" style="left: 90%; animation-delay: 1.5s;"></div>
+</div>
+
+<div class="container">
+    <div class="corner-heart top-left">💕</div>
+    <div class="corner-heart top-right">💖</div>
+    <div class="corner-heart bottom-left">💗</div>
+    <div class="corner-heart bottom-right">💝</div>
+
+    <!-- GIF Display - shown if gifUrl is provided -->
+    <div th:if="${gifUrl}" class="gif-container">
+        <img th:src="${gifUrl}" alt="Please say yes!" class="reaction-gif">
+    </div>
+
+    <!-- Fallback emoji if no GIF -->
+    <div th:unless="${gifUrl}" class="sad-emoji">😢</div>
+
+    <h1 th:text="${sureText}">Are you sure?</h1>
+
+    <form action="/sure-yes" method="post" th:if="${noCount == null || noCount < 3}">
+        <button type="submit" class="btn btn-yes">Yes 💕</button>
+    </form>
+
+    <br>
+
+    <form action="/sure-no" method="post">
+        <button type="submit" class="btn btn-no">No</button>
+    </form>
+
+    <!-- After 3 "No" clicks, change the message -->
+    <p th:if="${noCount != null && noCount >= 3}" class="final-message">
+        Come on... you know you want to say yes! 💕
+    </p>
+</div>
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yay! 💖</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Floating hearts animation */
+        .heart-bg {
+            position: fixed;
+            top: -10%;
+            left: 0;
+            width: 100%;
+            height: 120%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(45deg);
+            animation: float 15s infinite;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+        }
+
+        .heart::before {
+            top: -10px;
+            left: 0;
+        }
+
+        .heart::after {
+            left: 10px;
+            top: 0;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(45deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(45deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 60px 50px;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+            animation: scaleIn 0.5s ease-out;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            color: #d63384;
+            font-size: 3em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: bounce 0.6s ease-in-out 3;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .celebration-gif {
+            max-width: 100%;
+            max-height: 400px;
+            width: auto;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            object-fit: contain;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .emoji {
+            font-size: 4em;
+            display: inline-block;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            0%, 100% {
+                transform: rotate(-10deg);
+            }
+            50% {
+                transform: rotate(10deg);
+            }
+        }
+
+        /* Decorative corner hearts */
+        .corner-heart {
+            position: absolute;
+            font-size: 3em;
+            opacity: 0.3;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        .corner-heart.top-left {
+            top: 20px;
+            left: 20px;
+        }
+
+        .corner-heart.top-right {
+            top: 20px;
+            right: 20px;
+        }
+
+        .corner-heart.bottom-left {
+            bottom: 20px;
+            left: 20px;
+        }
+
+        .corner-heart.bottom-right {
+            bottom: 20px;
+            right: 20px;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        .message {
+            font-size: 1.5em;
+            color: #764ba2;
+            margin-top: 30px;
+            font-style: italic;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 40px 30px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .celebration-gif {
+                max-height: 300px;
+            }
+
+            .emoji {
+                font-size: 3em;
+            }
+
+            .message {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+    <script>
+        // Redirect to countdown after 3 seconds
+        setTimeout(function() {
+            window.location.href = '/countdown';
+        }, 3000);
+    </script>
+</head>
+<body>
+    <div class="heart-bg">
+        <div class="heart" style="left: 10%; animation-delay: 0s;"></div>
+        <div class="heart" style="left: 20%; animation-delay: 2s;"></div>
+        <div class="heart" style="left: 30%; animation-delay: 4s;"></div>
+        <div class="heart" style="left: 40%; animation-delay: 1s;"></div>
+        <div class="heart" style="left: 50%; animation-delay: 3s;"></div>
+        <div class="heart" style="left: 60%; animation-delay: 5s;"></div>
+        <div class="heart" style="left: 70%; animation-delay: 2.5s;"></div>
+        <div class="heart" style="left: 80%; animation-delay: 4.5s;"></div>
+        <div class="heart" style="left: 90%; animation-delay: 1.5s;"></div>
+    </div>
+
+    <div class="container">
+        <div class="corner-heart top-left">💕</div>
+        <div class="corner-heart top-right">💖</div>
+        <div class="corner-heart bottom-left">💗</div>
+        <div class="corner-heart bottom-right">💝</div>
+        
+        <h1>YAY! <span class="emoji">🎉</span></h1>
+        
+        <img src="/images/happy-excited.gif" alt="So excited!" class="celebration-gif">
+        
+        <p class="message">I knew you'd say yes! 💕</p>
+    </div>
+</body>
+</html>
