@@ -39,6 +39,11 @@ public class MyApi {
         return "countdown";
     }
 
+    @GetMapping("/gallery")
+    public String gallery() {
+        return "gallery";
+    }
+
     @PostMapping("/landing-no")
     public String landingNo(HttpSession session) {
         // Start at 0 (will show first GIF/message)

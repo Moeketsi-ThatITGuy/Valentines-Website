@@ -15,11 +15,9 @@
             font-family: 'Georgia', 'Times New Roman', serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            padding: 40px 20px;
             position: relative;
-            overflow: hidden;
+            overflow-x: hidden;
         }
 
         /* Floating hearts animation */
@@ -85,11 +83,13 @@
             border-radius: 30px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             text-align: center;
-            max-width: 600px;
+            max-width: 800px;
             width: 90%;
+            margin: 0 auto;
             position: relative;
             z-index: 10;
             backdrop-filter: blur(10px);
+            margin-bottom: 40px;
         }
 
         h1 {
@@ -196,9 +196,168 @@
             }
         }
 
+        /* Tracking Section Styles */
+        .tracking-section {
+            margin-top: 50px;
+            text-align: left;
+        }
+
+        .tracking-title {
+            font-size: 1.8em;
+            color: #764ba2;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .tracking-container {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .tracking-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+            position: relative;
+            padding-left: 60px;
+        }
+
+        .tracking-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .tracking-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 23px;
+            top: 50px;
+            width: 3px;
+            height: calc(100% + 5px);
+            background: linear-gradient(to bottom, #667eea, #e0e0e0);
+        }
+
+        .tracking-icon {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
+            z-index: 1;
+        }
+
+        .tracking-icon.pending {
+            background: linear-gradient(135deg, #e0e0e0, #b0b0b0);
+        }
+
+        .tracking-icon.completed {
+            background: linear-gradient(135deg, #56ab2f, #a8e063);
+        }
+
+        .tracking-content {
+            flex: 1;
+        }
+
+        .tracking-status {
+            font-size: 0.85em;
+            color: #667eea;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .tracking-status.pending {
+            color: #999;
+        }
+
+        .tracking-status.completed {
+            color: #56ab2f;
+        }
+
+        .tracking-label {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .tracking-description {
+            font-size: 0.95em;
+            color: #666;
+            font-style: italic;
+        }
+
+        .tracking-date {
+            font-size: 0.85em;
+            color: #999;
+            margin-top: 5px;
+        }
+
+        /* Gallery Link Section */
+        .gallery-link-section {
+            margin-top: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #fff5f7, #ffe5ec);
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(214, 51, 132, 0.2);
+        }
+
+        .gallery-link-title {
+            font-size: 1.8em;
+            color: #d63384;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .gallery-link-description {
+            font-size: 1.1em;
+            color: #666;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        .gallery-button {
+            display: inline-block;
+            padding: 18px 40px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.3em;
+            font-weight: bold;
+            box-shadow: 0 8px 20px rgba(245, 87, 108, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .gallery-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 30px rgba(245, 87, 108, 0.6);
+        }
+
+        .gallery-icon {
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
         @media (max-width: 600px) {
+            body {
+                padding: 20px 10px;
+            }
+
             .container {
                 padding: 40px 30px;
+                margin-bottom: 20px;
             }
 
             h1 {
@@ -221,6 +380,58 @@
 
             .timer-value {
                 font-size: 2em;
+            }
+
+            .tracking-section {
+                margin-top: 40px;
+            }
+
+            .tracking-title {
+                font-size: 1.5em;
+            }
+
+            .tracking-container {
+                padding: 20px;
+            }
+
+            .tracking-item {
+                padding-left: 50px;
+            }
+
+            .tracking-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2em;
+            }
+
+            .tracking-item:not(:last-child)::after {
+                left: 18px;
+            }
+
+            .tracking-label {
+                font-size: 1.1em;
+            }
+
+            .tracking-description {
+                font-size: 0.9em;
+            }
+
+            .gallery-link-section {
+                margin-top: 30px;
+                padding: 20px;
+            }
+
+            .gallery-link-title {
+                font-size: 1.5em;
+            }
+
+            .gallery-link-description {
+                font-size: 1em;
+            }
+
+            .gallery-button {
+                font-size: 1.1em;
+                padding: 15px 35px;
             }
         }
     </style>
@@ -289,6 +500,63 @@
     <h1>You're my Valentine <span class="emoji">💕</span></h1>
     <h2>📅 February 14, 2026</h2>
     <div class="timer" id="timer"></div>
+
+    <!-- Tracking Section -->
+    <div class="tracking-section">
+        <h3 class="tracking-title">Valentine's Day Plans 💝</h3>
+        <div class="tracking-container">
+
+            <!-- Present -->
+            <div class="tracking-item">
+                <div class="tracking-icon pending">
+                    🎁
+                </div>
+                <div class="tracking-content">
+                    <div class="tracking-status pending">Pending</div>
+                    <div class="tracking-label">Special Present</div>
+                    <div class="tracking-description">A surprise gift just for you</div>
+                    <div class="tracking-date">To be delivered: February 14</div>
+                </div>
+            </div>
+
+            <!-- Activity -->
+            <div class="tracking-item">
+                <div class="tracking-icon pending">
+                    🎪
+                </div>
+                <div class="tracking-content">
+                    <div class="tracking-status pending">Pending</div>
+                    <div class="tracking-label">Fun Activity</div>
+                    <div class="tracking-description">An exciting adventure we'll share together</div>
+                    <div class="tracking-date">Planned: February 14</div>
+                </div>
+            </div>
+
+            <!-- Dinner -->
+            <div class="tracking-item">
+                <div class="tracking-icon pending">
+                    🍽️
+                </div>
+                <div class="tracking-content">
+                    <div class="tracking-status pending">Pending</div>
+                    <div class="tracking-label">Romantic Dinner</div>
+                    <div class="tracking-description">Candlelit dinner at your favorite restaurant</div>
+                    <div class="tracking-date">Scheduled: February 14, 7:00 PM</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Photo Gallery Link Section -->
+    <div class="gallery-link-section">
+        <h3 class="gallery-link-title">Our Special Moments 💕</h3>
+        <p class="gallery-link-description">Take a trip down memory lane with our favorite photos together</p>
+        <a href="/gallery" class="gallery-button">
+            <span class="gallery-icon">📸</span>
+            View Our Memories
+        </a>
+    </div>
 </div>
 </body>
 </html>
